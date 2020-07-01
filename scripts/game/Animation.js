@@ -1,11 +1,12 @@
 class Animation {
-    constructor(mat, imageAnimation, x, widthAnimation, heightAnimation, widhtSprite, heightSprite) {
+    constructor(mat, imageAnimation, x, variationY, widthAnimation, heightAnimation, widhtSprite, heightSprite) {
         this.mat = mat
         this.imageAnimation = imageAnimation
         this.widthAnimation = widthAnimation
         this.heightAnimation = heightAnimation
         this.x = x
-        this.y = height - this.heightAnimation
+        this.variationY = variationY
+        this.y = height - this.heightAnimation - this.variationY
         this.widhtSprite = widhtSprite
         this.heightSprite = heightSprite
 
