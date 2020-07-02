@@ -11,6 +11,7 @@ let character
 let ememy
 let bigEnemy
 let flyEnemy
+let enemyActual = 0
 
 let score
 
@@ -152,7 +153,7 @@ function setup() {
     104,
     104,
     10,
-    1000,
+    100,
   )
 
   const bigEnemy = new Enemy(
@@ -165,7 +166,7 @@ function setup() {
     400,
     400,
     10,
-    2500,
+    100,
   )
 
   const flyEnemy = new Enemy(
@@ -178,7 +179,7 @@ function setup() {
     200,
     150,
     10,
-    1500,
+    100,
   )
 
   enemys.push(enemy)
@@ -205,14 +206,24 @@ function draw() {
   character.show()
   character.appGravity()
 
-  enemys.forEach(element => {
-    element.show()
-    element.move()
+  const enemyUn = enemys[enemyActual]
+  const enemyVisible = enemyUn.x < -enemyUn.widthAnimation
+  console.log(enemyUn.widthAnimation, enemyUn.x, enemyVisible)
 
-    if (character.isCollide(element)) {
-      image(imageGameOver, width / 2 - 200, height / 3)
-      noLoop()
+  enemyUn.show()
+  enemyUn.move()
+
+  if (enemyVisible) {
+    enemyActual++
+    if (enemyActual > 2) {
+      enemyActual = 0
     }
-  })
+    enemyUn.speed = parseInt(random(10, 30))
+  }
+
+  if (character.isCollide(enemyUn)) {
+    image(imageGameOver, width / 2 - 200, height / 3)
+    noLoop()
+  }
 }
 
